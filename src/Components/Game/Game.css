@@ -1,0 +1,21 @@
+h1{
+    margin: auto,
+}
+p{
+    margin: auto,
+}
+.card-game{
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.text-field {
+    font-size: 50px!important;
+    width: 40px;
+    margin-left: 10px;
+    align-self: center;
+}
