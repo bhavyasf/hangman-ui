@@ -7,6 +7,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store, { sagas } from './redux/store';
 import gameSaga from './sagas/game';
+import dotenv from 'dotenv';
+dotenv.config({
+  path: '../'
+});
 
 sagas.run(gameSaga);
 

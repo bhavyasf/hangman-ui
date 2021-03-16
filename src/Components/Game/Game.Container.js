@@ -4,12 +4,11 @@ import { fetchGuessWord, guessLetter, fetchGuessWordById, guessWord } from '../.
 import { isJSON } from '../../utils';
 
 const mapStateToProps = (state) => {
-    console.log(state.gameReducer.type);
-    console.log(state.gameReducer.wordProgress);
     return {
         randomWord: state?.gameReducer?.wordProgress,
         id: state?.gameReducer?.id,
         newGame: state?.gameReducer?.newGame || false,
+        hasWon: state?.gameReducer?.hasWon,
         guessesLeft: isJSON(state?.gameReducer?.errorMessage) ? JSON.parse(state?.gameReducer?.errorMessage).guesses : state.gameReducer.guesses,
         errorMessage: isJSON(state?.gameReducer?.errorMessage) ? JSON.parse(state?.gameReducer?.errorMessage).message : state?.gameReducer?.errorMessage,
     }

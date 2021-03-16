@@ -1,5 +1,4 @@
 import createReducer from 'redux-createreducer';
-
 import {
     FETCH_GUESS_WORD,
     FETCH_GUESS_WORD_SUCCESS,
@@ -8,13 +7,11 @@ import {
     GUESS_WORD,
 } from '../actions/game';
 
-
 const actionHandlers = {
-    [FETCH_GUESS_WORD]: (state) => {
-        return {
-            ...state,
-        }
-    },
+    [FETCH_GUESS_WORD]: () => ({
+        hasWon: false,
+        guesses: 5,
+    }),
     [FETCH_GUESS_WORD_SUCCESS]: (state, fetchWordSuccess) => ({
         ...state,
         ...fetchWordSuccess,

@@ -9,11 +9,14 @@ import {
    errorResult,
    fetchGuessWordSuccess,
 } from '../redux/actions/game';
+import { REACT_APP_API_BASE_URL } from '../env';
 
 export function* fetchGuessWord() {
    try {
-      const { data } = yield call(axios.post, 'http://localhost:4000/games');
+      const { data } = yield call(axios.post, `${REACT_APP_API_BASE_URL}games`);
       console.log(data);
+      const { localStorage } = window;
+      localStorage.setItem('game-id', data.id);
       yield put(fetchGuessWordSuccess(data));
    } catch (error) {
       const { response: { data : { error: { message } = {} } = {} } = {} } = error;
@@ -23,7 +26,7 @@ export function* fetchGuessWord() {
 
 export function* submitLetter({ id, letter }) {
    try {
-      const { data } = yield call(axios.patch, `http://localhost:4000/games/${id}/letters/${letter}`);
+      const { data } = yield call(axios.patch, `${REACT_APP_API_BASE_URL}games/${id}/letters/${letter}`);
       console.log(data);
       yield put(fetchGuessWordSuccess(data));
    } catch (error) {
@@ -34,7 +37,7 @@ export function* submitLetter({ id, letter }) {
 
 export function* fetchGuessWordById({ id }) {
    try {
-      const { data } = yield call(axios.get, `http://localhost:4000/games/${id}`, { params: { hasWon: false } });
+      const { data } = yield call(axios.get, `${REACT_APP_API_BASE_URL}games/${id}`, { params: { hasWon: false } });
       yield put(fetchGuessWordSuccess(data));
    } catch (error) {
       const { response: { data : { error: { message } = {} } = {} } = {} } = error;
@@ -44,7 +47,7 @@ export function* fetchGuessWordById({ id }) {
 
 export function* submitWord({ id, word }) {
    try  {
-     const { data } = yield call(axios.patch, `http://localhost:4000/games/${id}/words/${word}`);
+     const { data } = yield call(axios.patch, `${REACT_APP_API_BASE_URL}games/${id}/words/${word}`);
      console.log(data);
      yield put(fetchGuessWordSuccess(data));
    } catch (error) {

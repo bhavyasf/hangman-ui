@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Input, Button, Container, Dialog, DialogContent } from '@material-ui/core'
+import { Input, Button, Container } from '@material-ui/core';
 import HangmanBar from '../HangmanBar';
+import DialogBox  from '../Dialog/Dialog';
 
 const styles = {
     Input: {
@@ -55,12 +56,15 @@ class Game extends Component {
         super(props);
         const { localStorage } = window;
         const gameId = localStorage.getItem('game-id');
+        console.log('GAME ID IN CONSTRUCTOR', gameId);
         if (!gameId) {
             props.fetchGuessWord();
         } else {
+            console.log('GAME ID IN FETCHING', gameId);
             props.fetchGameDetailsById(gameId);
         }
     }
+    
     onCompleteWordClicked() {
         const completeWordInputElement = document.getElementById('complete-word-input');
         if (!completeWordInputElement.value) return;
@@ -75,16 +79,8 @@ class Game extends Component {
         if (!id) return;
         submitLetter(id, guessLetterInputElement.value);
     }
-    storeIdInLocalStorage(id) {
-        const { localStorage } = window;
-        if (!localStorage.getItem('game-id') && id) {
-            localStorage.setItem('game-id', id);
-        }
-    }
     render() {
-        // props.randomWord will work here definitely!!
         const { randomWord, id, guessesLeft, errorMessage, hasWon } = this.props;
-        this.storeIdInLocalStorage(id);
         const randomWordArray = randomWord ? randomWord.split('') : [];
         return (
             <div>
@@ -111,6 +107,14 @@ class Game extends Component {
                        <p style={styles.errorMessage}>{ errorMessage }</p>
                     </div>
                 </Container>
+                <DialogBox 
+                open={hasWon || !guessesLeft } 
+                message={ !hasWon ? errorMessage : '' } 
+                title={hasWon ? 'You Won!' :  (!guessesLeft ? 'Sorry, you Lost' : '')}
+                buttonMessage="Return to Home Page" 
+                endGame={hasWon || !guessesLeft }
+                gameId={id}
+                />
             </div>
         );
     }
