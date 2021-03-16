@@ -35,7 +35,6 @@ function HomePage() {
         <Container style={styles.card}>
            {isGameId ? <Link to="/game" style={styles.link}><Button style={styles.button} variant="contained" color="primary">Resume Current Game</Button></Link>: ''} 
            <Button style={styles.button} variant="contained" color="primary" onClick={()=> { newGameClicked(history)}}>Start New Game</Button>
-           <Button style={styles.button} variant="contained" color="secondary">See dashboards</Button>
         </Container>
         </div>
     );

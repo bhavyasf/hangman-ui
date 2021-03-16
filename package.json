@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build": "react-scripts build SKIP_PREFLIGHT_CHECK=true",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test": "react-scripts test SKIP_PREFLIGHT_CHECK=true",
     "eject": "react-scripts eject SKIP_PREFLIGHT_CHECK=true",
     "heroku-postbuild": "npm run build SKIP_PREFLIGHT_CHECK=true"
